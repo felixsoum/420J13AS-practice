@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * felixsoum
+ * 420-J13-AS
+ * Practice solving inequalities and insertion sort.
+ */
+
+using System;
 
 namespace Practice01
 {
@@ -29,6 +35,11 @@ namespace Practice01
             Console.WriteLine($"{BinaryToString(binaryA)} + {BinaryToString(binaryB)} = {BinaryToString(binaryC)}");
         }
 
+        /// <summary>
+        /// Solve for the largest n such that
+        /// 8*n^2 less than (&lt;) 64*n*log2(n).
+        /// </summary>
+        /// <returns>Solution n.</returns>
         public static int SolveA()
         {
             for (int n = 1000; n > 0; n--)
@@ -41,6 +52,11 @@ namespace Practice01
             throw new Exception("Answer not found.");
         }
 
+        /// <summary>
+        /// Solve for the smallest n such that
+        /// 100*n^2 less than (&lt;) 2^n.
+        /// </summary>
+        /// <returns>Solution n.</returns>
         public static int SolveB()
         {
             for (int n = 1; n < 1000; n++)
@@ -53,6 +69,10 @@ namespace Practice01
             throw new Exception("Answer not found.");
         }
 
+        /// <summary>
+        /// Sorts an array using insertion sort in ascending order.
+        /// </summary>
+        /// <param name="A">Array to sort.</param>
         public static void InsertionSort(int[] A)
         {
             for (int j = 1; j <= A.Length - 1; j++)
@@ -68,6 +88,10 @@ namespace Practice01
             }
         }
 
+        /// <summary>
+        /// Sorts an array using insertion sort in descending order.
+        /// </summary>
+        /// <param name="A">Array to sort.</param>
         public static void InsertionSortDescending(int[] A)
         {
             for (int j = 1; j <= A.Length - 1; j++)
@@ -83,6 +107,12 @@ namespace Practice01
             }
         }
 
+        /// <summary>
+        /// Adds two integers represented in binary number.
+        /// </summary>
+        /// <param name="A">First binary number.</param>
+        /// <param name="B">Second binary number.</param>
+        /// <returns>The sum of both binary numbers.</returns>
         public static bool[] BinaryAdd(bool[] A, bool[] B)
         {
             bool[] result = new bool[A.Length + 1];
@@ -106,6 +136,11 @@ namespace Practice01
             return result;
         }
 
+        /// <summary>
+        /// Converts a binary number to a string representation.
+        /// </summary>
+        /// <param name="A">The binary number to convert.</param>
+        /// <returns>A string representation using 0 and 1.</returns>
         public static string BinaryToString(bool[] A)
         {
             string result = "";
