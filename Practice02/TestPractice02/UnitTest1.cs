@@ -9,6 +9,21 @@ namespace TestPractice02
     public class UnitTest1
     {
         [TestMethod]
+        public void TestFibonacci()
+        {
+            Assert.AreEqual(55, Program.Fibonacci(10));
+        }
+
+        [TestMethod]
+        public void TestBinarySearch()
+        {
+            int[] binarySearchInput = new int[] { 1, 6, 7, 10, 12, 14, 22, 26 };
+            int searchValue = 12;
+            int resultIndex = Program.BinarySearch(binarySearchInput, searchValue, 0, binarySearchInput.Length - 1);
+            Assert.AreEqual(4, resultIndex);
+        }
+
+        [TestMethod]
         public void TestMergeOdd()
         {
             int[] actual = new int[] { 2, 4, 8, 9, 11, 25, 34, 57, 3, 5, 7, 15, 26, 33, 44 };
