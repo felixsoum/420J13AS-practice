@@ -18,7 +18,7 @@ namespace Practice02
         {
             ////A.
             int fiboInput = 10;
-            Console.WriteLine($"Fibonnaci n-th term is {Fibonacci(fiboInput)}");
+            Console.WriteLine($"Fibonnaci {fiboInput}-th term is {Fibonacci(fiboInput)}");
 
             ////B.
             A = new int[] { 1, 6, 7, 10, 12, 14, 22, 26 };
