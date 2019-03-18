@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Dealer : MonoBehaviour
 {
-    [SerializeField] Card[] cards = new Card[8];
+    [SerializeField] Card[] cards;
     List<CardData> cardData = new List<CardData>()
     {
         new CardData(Color.red, 2),
