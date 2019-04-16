@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class AStar : MonoBehaviour
 {
+    private const float Speed = 0.1f;
     [SerializeField] GameObject tilePrefab;
 
     int[,] map = new int[,]
     {
         {0, 0, 0, 0, 0, 0, 0, 0 },
-        {0, 0, 0, 0, 0, 0, 0, 0 },
-        {0, 0, 0, 0, 0, 0, 0, 0 },
+        {0, 3, 0, 0, 0, 0, 0, 0 },
         {0, 0, 0, 0, 0, 0, 0, 0 },
         {1, 1, 1, 1, 0, 0, 0, 0 },
-        {0, 0, 0, 0, 0, 0, 0, 0 },
-        {0, 0, 0, 0, 0, 0, 0, 0 },
+        {0, 0, 0, 1, 0, 0, 0, 0 },
+        {0, 2, 0, 1, 0, 0, 0, 0 },
+        {0, 0, 0, 1, 0, 0, 0, 0 },
         {0, 0, 0, 0, 0, 0, 0, 0 },
     };
 
@@ -29,20 +30,29 @@ public class AStar : MonoBehaviour
 
         tiles = new Tile[length, width];
 
+        Tile start = null;
+        Tile end = null;
+
         for (int y = 0; y < length; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                Tile t = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity).GetComponent<Tile>();
-                t.SetType(map[y, x] == 0 ? TileType.Undiscovered : TileType.Blocked);
+                Tile t = Instantiate(tilePrefab, new Vector3(x, length - y, 0), Quaternion.identity).GetComponent<Tile>();
+                t.SetType(map[y, x] == 1 ? TileType.Blocked : TileType.Undiscovered);
                 t.x = x;
                 t.y = y;
                 tiles[y, x] = t;
+                if (map[y, x] == 2)
+                {
+                    start = t;   
+                }
+                else if (map[y, x] == 3)
+                {
+                    end = t;
+                }
             }
         }
 
-        Tile start = tiles[1, 1];
-        Tile end = tiles[6, 1];
 
         StartCoroutine(AStarCoroutine(start, end));
     }
@@ -53,7 +63,7 @@ public class AStar : MonoBehaviour
         var openSet = new List<Tile>() { start };
 
         start.gScore = 0;
-        HeuristicCostEstimate(start, goal);
+        start.fScore = HeuristicCostEstimate(start, goal);
         goal.SetType(TileType.Goal);
 
         while (openSet.Count > 0)
@@ -67,7 +77,7 @@ public class AStar : MonoBehaviour
             {
                 break;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(Speed);
 
             foreach (var neighbor in GetNeighbors(current))
             {
@@ -86,7 +96,7 @@ public class AStar : MonoBehaviour
                 if (!openSet.Contains(neighbor))
                 {
                     neighbor.SetType(TileType.Discovered);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(Speed);
                     openSet.Add(neighbor);
                 }
                 else if (tentativeGScore >= neighbor.gScore)
@@ -94,17 +104,26 @@ public class AStar : MonoBehaviour
                     continue;
                 }
 
+                neighbor.predecessor = current;
                 neighbor.gScore = tentativeGScore;
-                HeuristicCostEstimate(neighbor, goal);
-                neighbor.fScore += neighbor.gScore;
+                neighbor.fScore = neighbor.gScore + HeuristicCostEstimate(neighbor, goal);
             }
         }
+
+        var predecessor = goal;
+        while (predecessor != null)
+        {
+            predecessor.SetType(TileType.Goal);
+            predecessor = predecessor.predecessor;
+            yield return new WaitForSeconds(Speed);
+        }
+        start.SetType(TileType.Goal);
     }
 
-    void HeuristicCostEstimate(Tile source, Tile destination)
+    int HeuristicCostEstimate(Tile source, Tile destination)
     {
-        //source.fScore = 0;
-        source.fScore = Mathf.Abs(source.x - destination.x) + Mathf.Abs(source.y - destination.y);
+        return 0;
+        //return Mathf.Abs(source.x - destination.x) + Mathf.Abs(source.y - destination.y);
     }
 
     List<Tile> GetNeighbors(Tile tile)

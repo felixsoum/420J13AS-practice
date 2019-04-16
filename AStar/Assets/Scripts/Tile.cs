@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
     public int gScore = int.MaxValue;
     public int fScore = int.MaxValue;
     public TileType tileType;
+    public Tile predecessor;    
 
     SpriteRenderer spriteRenderer;
 
