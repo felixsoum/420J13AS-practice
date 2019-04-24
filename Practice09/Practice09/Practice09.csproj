@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="AdjacentVertex.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="ListGraph.cs" />
+    <Compile Include="MatrixGraph.cs" />
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

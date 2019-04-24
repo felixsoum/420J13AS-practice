@@ -9,6 +9,9 @@ namespace Practice09
         public int distance;
         public Vertex predecessor;
 
+        public int discoveryTime;
+        public int finishingTime;
+
         public Vertex(char key)
         {
             this.key = key;
