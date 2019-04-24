@@ -1,4 +1,6 @@
-﻿namespace Practice06
+﻿using System;
+
+namespace Practice06
 {
     class Program
     {
@@ -14,7 +16,10 @@
             integerTree.TreeInsert(7);
             integerTree.TreeInsert(5);
             integerTree.InorderTreeWalk();
-            System.Console.WriteLine();
+            Console.WriteLine();
+            int threeSuccessor = integerTree.TreeSuccessor(3);
+            Console.WriteLine($"Successor of 3 is {threeSuccessor}.");
+            Console.WriteLine();
 
             BinarySearchTree<string> wordTree = new BinarySearchTree<string>();
             wordTree.TreeInsert("haricot");
@@ -26,7 +31,10 @@
             wordTree.TreeInsert("apple");
             wordTree.TreeInsert("grapes");
             wordTree.InorderTreeWalk();
-            System.Console.WriteLine();
+            Console.WriteLine();
+            string bananaSuccessor = wordTree.TreeSuccessor("banana");
+            Console.WriteLine($"Successor of banana is {bananaSuccessor}.");
+            Console.WriteLine();
         }
     }
 }

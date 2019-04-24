@@ -51,11 +51,12 @@ namespace Practice06
             return x;
         }
 
-        BinarySearchTreeNode<T> TreeSuccessor(BinarySearchTreeNode<T> x)
+        public T TreeSuccessor(T k)
         {
+            var x = TreeSearch(k);
             if (x.right != null)
             {
-                return TreeMinimum(x.right);
+                return TreeMinimum(x.right).key;
             }
             var y = x.p;
             while (y != null && x == y.right)
@@ -63,7 +64,7 @@ namespace Practice06
                 x = y;
                 y = y.p;
             }
-            return y;
+            return y.key;
         }
 
         public void TreeInsert(T k)
