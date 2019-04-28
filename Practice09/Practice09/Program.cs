@@ -74,7 +74,7 @@ namespace Practice09
             graph.AddEdge('z', 'x', 7);
 
             Console.WriteLine(graph.BellmanFord('s')); // True
-            graph.PrintPath('s', 'z'); // ->s->y->t->x->z
+            graph.PrintPath('s', 'z'); // ->s->y->x->t->z
 
             graph.AddEdge('z', 'y', -9999);
             Console.WriteLine(graph.BellmanFord('s')); // False
